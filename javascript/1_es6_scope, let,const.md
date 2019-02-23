@@ -1,4 +1,7 @@
 # 1. scope 스코프
+
+
+
 대부분의 프로그래밍 언어는 블록 레벨 스코프 지만,  
 javascript에서는 함수 레벨 스코프(Function-level scope)를 따른다.   
 
@@ -77,60 +80,6 @@ console.log(newArg, newObj);
 // [10, 1], {foo: 'rab'}
 ```
 
-## 스프레드(spread) 문법 - [...arr]
-```js
-// 함수호출
-myFunction(...iterableObj);
-
-// 배열 리터럴, 문자열
-[...iterableObj, '4', 'five', 6];
-
-// 객체 리터럴( new in ECMAScript 2018)
-let objClone = { ...obj };
-```
-
-- 배열 복사 및 합치기
-```js
-//ES5에서 배열 합치기
-var arr1 = [2,3,4]
-var arr2 = [5,6,7]
-var merged = arr1.concat(arr2)
-
-//ES6에서 배열 합치기
-const newMerged = [...arr1, ...arr2]
-
-//ES5에서 배열 복사하기
-var copiedArr = arr1.slice()
-//ES6에서 배열 복사하기
-const copiedArr = [...arr1]
-
-
-//ES5에서 오브젝트 합치기
-var obj1 = {a: 3}
-var obj2 = {b: 4}
-var merged = Object.assign({}, obj1, obj2)
-
-//ES5에서 오브젝트 복사하기
-var copiedObj = Object.assign({}, obj1)
-
-//ES5에서 오브젝트 복사하기
-const copiedObj = {...obj1}
-```
-
-
-- 배열을 이어붙이는 더 나은 방법  (concat, unshift)
-```js
-var arr1 = [0, 1, 2];
-var arr2 = [3, 4, 5];
-// arr2 의 모든 항목을 arr1 에 붙임
-arr1 = arr1.concat(arr2);
-```
-```js
-var arr1 = [0, 1, 2];
-var arr2 = [3, 4, 5];
-// arr2 의 모든 항목을 arr1 의 앞에 붙임
-Array.prototype.unshift.apply(arr1, arr2) // arr1 은 이제 [3, 4, 5, 0, 1, 2] 가 됨
-```
 
 ## var, let, const 의 사용
 ES6를 사용한다면 var는 사용하지 않는다. (혹은 자제한다)  

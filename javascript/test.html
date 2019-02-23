@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test</title>
+</head>
+<body>
+
+<ul>
+    <li>apple</li>  
+    <li>orange</li>
+    <li>banana</li>
+    <li>strawberry</li>
+</ul>
+    
+
+<script>
+function print(){
+  
+  let list = document.querySelectorAll('li');
+  console.log(toString.call(list)); // toString.call() 타입체크시 많이 사용!
+  let listArray = Array.from(list); // li노드로 구성된 배열로 만들어줌
+  console.log(toString.call(listArray)); // array로 변환됐는지 확인
+
+  let eArray = listArray.filter(function(v){
+    return v.innerText.includes('e');
+  });
+  return eArray;
+}
+
+console.log(print());
+
+
+
+</script>
+</body>
+</html>
