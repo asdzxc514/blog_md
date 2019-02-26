@@ -8,29 +8,37 @@
 </head>
 <body>
 
-<ul>
-    <li>apple</li>  
-    <li>orange</li>
-    <li>banana</li>
-    <li>strawberry</li>
-</ul>
-    
 
-<script>
-function print(){
   
-  let list = document.querySelectorAll('li');
-  console.log(toString.call(list)); // toString.call() 타입체크시 많이 사용!
-  let listArray = Array.from(list); // li노드로 구성된 배열로 만들어줌
-  console.log(toString.call(listArray)); // array로 변환됐는지 확인
+<script>
 
-  let eArray = listArray.filter(function(v){
-    return v.innerText.includes('e');
-  });
-  return eArray;
+
+  
+const data = [
+  {
+    name: 'coffee',
+    order: true,
+    items: ['americano', ' milk', ' green-tea']
+  },
+  {
+    name: 'starbucks',
+    order: false,
+  }
+]
+
+function fn(tags, name, items){
+//   console.log(tags);
+  if(typeof items === "undefined"){
+    items = "주문 가능한 상품이 없습니다.";
+  }
+  return (tags[0] + name + tags[1] + items + tags[2]);
 }
 
-console.log(print());
+const template = fn`<div>welcome ${data[0].name} !!</div>
+                 <h2>주문가능항목</h2><div>${data[0].items}</div>`;
+
+console.log(template);
+
 
 
 
