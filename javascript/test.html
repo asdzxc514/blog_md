@@ -5,43 +5,161 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>test</title>
+    <style>
+      body { font-size: 18px; font-weight: bold; }
+      div { color: #333; margin: 30px 0; transition: color 0.3s; }
+      .info p { margin-bottom: 30px; padding: 20px;  font-size: 14px; font-weight: 400; background: #f3f3f3; transition: all .3s; }
+      .info p span { font-size: 18px; font-weight: bold; color: #607D8B; }
+      .toggle_box { display: none; }
+            
+      #test1, #test2 { cursor: pointer; }
+      .clicked { color: skyblue; }
+
+
+    </style>
 </head>
 <body>
 
+<div id="test1">클릭 이벤트(hasClass)</div>
+<div id="test2">클릭 이벤트(toggle)</div>
+<div class="info">
+  <button class="test">자세히 보기</button>
+  <p class="toggle_box">
+      <span>Element.classList()</span><br>
+      ex) test2.classList.toggle()<br><br>    
+
+      메소드정리<br>
+      1. <strong>item( Number )</strong> : 클래스 값을 콜렉션의 인덱스를 이용하여 반환함<br>
+      2. <strong>toggle ( String [, force] )</strong> : 클래스가 있으면 지우고, 없으면 만들고<br>
+      3. <strong>contain ( String )</strong> : 특정 클래스 값이 존재하는지 확인<br>
+      4. <strong>replace( oldClass, newClass )</strong> : 기존 클래스에서 새로운 클래스로 교체함
+  </p>
+</div>
+
+
+<div class="info">
+  <button class="test">자세히 보기</button>
+  <p class="toggle_box">
+      <span>Element.classList()</span><br>
+      ex) test2.classList.toggle()<br><br>    
+
+      메소드정리<br>
+      1. <strong>item( Number )</strong> : 클래스 값을 콜렉션의 인덱스를 이용하여 반환함<br>
+      2. <strong>toggle ( String [, force] )</strong> : 클래스가 있으면 지우고, 없으면 만들고<br>
+      3. <strong>contain ( String )</strong> : 특정 클래스 값이 존재하는지 확인<br>
+      4. <strong>replace( oldClass, newClass )</strong> : 기존 클래스에서 새로운 클래스로 교체함
+  </p>
+</div>
+
+
+<div class="js-clock">
+  <h1>00:00</h1>
+</div>
+<div id="test4">클릭해봐</div>
+<div id="test5">클릭해봐</div>
+<div id="test6">클릭해봐</div>
+<div id="test7">클릭해봐</div>
+<div id="test8">클릭해봐</div>
 
   
 <script>
 
+// 공통 : 자세히 보기
+// const infoBox = document.querySelectorAll(".toggle_box");
+// const infoBox = document.getElementById("tb");
+// const thisInfoBod = this.infoBox;
 
-  
-const data = [
-  {
-    name: 'coffee',
-    order: true,
-    items: ['americano', ' milk', ' green-tea']
-  },
-  {
-    name: 'starbucks',
-    order: false,
-  }
-]
+// function toggleBox(){
+//   this.infoBox.classList.toggle("toggle_box");
+// }
 
-function fn(tags, name, items){
-//   console.log(tags);
-  if(typeof items === "undefined"){
-    items = "주문 가능한 상품이 없습니다.";
-  }
-  return (tags[0] + name + tags[1] + items + tags[2]);
+
+
+
+
+const tesconstt = document.querySelectorAll('.info button'); 
+
+test.addEventListener("click", click);
+ 
+// [].forEach.call(test,function(aaa){
+//     aaa.addEventListener("click",click,false);
+// });
+ 
+function click(e){
+    // this.classList.toggle("toggle_box");
+    alert('ddd');
 }
 
-const template = fn`<div>welcome ${data[0].name} !!</div>
-                 <h2>주문가능항목</h2><div>${data[0].items}</div>`;
 
-console.log(template);
+
+
+
+
+
+
+
+
+
+
+
+
+// 공통 : test1, test2 
+const test1 = document.querySelector("#test1");
+const test2 = document.querySelector("#test2");
+const CLICKED_CLASS = "clicked";
+
+// test1
+function handleClick(){
+  const hasClass = test1.classList.contains(CLICKED_CLASS);
+  
+  if(!hasClass){
+    test1.classList.add(CLICKED_CLASS);
+  } else {
+    test1.classList.remove(CLICKED_CLASS);
+  }
+}
+function init(){
+  test1.addEventListener("click", handleClick);  
+}
+init();
+
+// test2
+function handleClick2(){
+  test2.classList.toggle(CLICKED_CLASS);
+}
+function init2(){
+  test2.addEventListener("click", handleClick2);
+}
+init2();
+
+// ======================================================
+
+// js-clock
+const clockContainer = document.querySelector(".js-clock"),
+      clockTitle = clockContainer.querySelector("h1");
+
+function getTime(){
+  const date = new Date();  
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+  clockTitle.innerText = `현재시간 ${hours < 10 ? `0${hours}` : hours }:${
+    minutes < 10 ? `0${minutes}` : minutes 
+  }:${seconds < 10 ? `0${seconds}` : seconds}`;
+}
+
+function init3(){
+  getTime();
+  setInterval(getTime, 1000);
+}
+
+init3();
+
 
 
 
 
 </script>
+<script src="clock.js"></script>
 </body>
 </html>

@@ -121,6 +121,45 @@ console.log(toString.call(Health2)); // function인것을 확인
 ## Object assign으로 JS객체만들기
 
 
+```js
+
+// // Object.create()
+const healthObj = {
+  showHealth : function(){
+    console.log("오늘 운동시간 : " + this.healthTime);
+  }
+}
+
+const myHealth = Object.create(healthObj);  // 순수 object로 생성자 만들기! 
+
+myHealth.healthTime = "11:20";
+myHealth.name = "HYEJIN";
+
+console.log("myHealth is ", myHealth2);
+
+
+
+
+// Object.assign()
+
+const healthObj2 = {
+  showHealth2 : function(){
+    console.log("오늘 운동시간 : " + this.healthTime);
+  }
+}
+
+const myHealth2 = Object.assign(Object.create(healthObj2), {
+  lastTime : "11:20",
+  name : "HYEJIN"
+} ); 
+
+
+console.log("myHealth2 is ", myHealth2);
+```
+
+
+
+
 ## Object assign으로 Immutable 객체만들기
 
 
