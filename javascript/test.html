@@ -1,165 +1,305 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>test</title>
-    <style>
-      body { font-size: 18px; font-weight: bold; }
-      div { color: #333; margin: 30px 0; transition: color 0.3s; }
-      .info p { margin-bottom: 30px; padding: 20px;  font-size: 14px; font-weight: 400; background: #f3f3f3; transition: all .3s; }
-      .info p span { font-size: 18px; font-weight: bold; color: #607D8B; }
-      .toggle_box { display: none; }
-            
-      #test1, #test2 { cursor: pointer; }
-      .clicked { color: skyblue; }
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>test</title>
+		<style>
+			body { font-size: 18px; font-weight: bold; }
+			div { color: #333; margin: 30px 0; transition: color 0.3s; }
+			.info p { margin-bottom: 30px; padding: 20px;  font-size: 14px; font-weight: 400; background: #f3f3f3; transition: all .3s; }
+			.info p span { font-size: 18px; font-weight: bold; color: #607D8B; }
+			/* .toggle_box { display: none; } */
+						
+			#test1, #test2 { cursor: pointer; }
+			.clicked { color: skyblue; }
 
+			/* 시계 */
+			.form, .greetings { display: none; }
+			.showing { display: block; }
 
-    </style>
+		</style>
 </head>
 <body>
 
 <div id="test1">클릭 이벤트(hasClass)</div>
 <div id="test2">클릭 이벤트(toggle)</div>
 <div class="info">
-  <button class="test">자세히 보기</button>
-  <p class="toggle_box">
-      <span>Element.classList()</span><br>
-      ex) test2.classList.toggle()<br><br>    
+	<!-- <button class="test">자세히 보기</button> -->
+	<p class="toggle_box">
+			<span>Element.classList()</span><br>
+			ex) test2.classList.toggle()<br><br>    
 
-      메소드정리<br>
-      1. <strong>item( Number )</strong> : 클래스 값을 콜렉션의 인덱스를 이용하여 반환함<br>
-      2. <strong>toggle ( String [, force] )</strong> : 클래스가 있으면 지우고, 없으면 만들고<br>
-      3. <strong>contain ( String )</strong> : 특정 클래스 값이 존재하는지 확인<br>
-      4. <strong>replace( oldClass, newClass )</strong> : 기존 클래스에서 새로운 클래스로 교체함
-  </p>
+			메소드정리<br>
+			1. <strong>item( Number )</strong> : 클래스 값을 콜렉션의 인덱스를 이용하여 반환함<br>
+			2. <strong>toggle ( String [, force] )</strong> : 클래스가 있으면 지우고, 없으면 만들고<br>
+			3. <strong>contain ( String )</strong> : 특정 클래스 값이 존재하는지 확인<br>
+			4. <strong>replace( oldClass, newClass )</strong> : 기존 클래스에서 새로운 클래스로 교체함
+	</p>
+</div>
+
+<hr>
+
+<div>
+	<div class="js-clock">
+		<h1>00:00</h1>
+	</div>
+	<form action="" class="js-form-greeting form">
+		<input type="text" placeholder="What is your name?" />
+	</form>
+	<h4 class="js-greetings greetings"></h4>
 </div>
 
 
-<div class="info">
-  <button class="test">자세히 보기</button>
-  <p class="toggle_box">
-      <span>Element.classList()</span><br>
-      ex) test2.classList.toggle()<br><br>    
-
-      메소드정리<br>
-      1. <strong>item( Number )</strong> : 클래스 값을 콜렉션의 인덱스를 이용하여 반환함<br>
-      2. <strong>toggle ( String [, force] )</strong> : 클래스가 있으면 지우고, 없으면 만들고<br>
-      3. <strong>contain ( String )</strong> : 특정 클래스 값이 존재하는지 확인<br>
-      4. <strong>replace( oldClass, newClass )</strong> : 기존 클래스에서 새로운 클래스로 교체함
-  </p>
+<div>
+	<h2>TO DO LIST</h2>
+	<form action="" class="js-toDoForm">
+		<input type="text" placeholder="Write a to do" />
+	</form>  
+	<ul class="js-toDoList"></ul>
 </div>
 
+<hr>
 
-<div class="js-clock">
-  <h1>00:00</h1>
-</div>
 <div id="test4">클릭해봐</div>
 <div id="test5">클릭해봐</div>
 <div id="test6">클릭해봐</div>
 <div id="test7">클릭해봐</div>
 <div id="test8">클릭해봐</div>
 
-  
+	
 <script>
 
 // 공통 : 자세히 보기
 // const infoBox = document.querySelectorAll(".toggle_box");
-// const infoBox = document.getElementById("tb");
-// const thisInfoBod = this.infoBox;
-
 // function toggleBox(){
 //   this.infoBox.classList.toggle("toggle_box");
 // }
 
-
-
-
-
-const tesconstt = document.querySelectorAll('.info button'); 
-
-test.addEventListener("click", click);
  
-// [].forEach.call(test,function(aaa){
-//     aaa.addEventListener("click",click,false);
-// });
- 
-function click(e){
-    // this.classList.toggle("toggle_box");
-    alert('ddd');
+
+
+
+
+
+/* Click Event */
+
+
+	// 공통 : test1, test2 
+	const test1 = document.querySelector("#test1");
+	const test2 = document.querySelector("#test2");
+	const CLICKED_CLASS = "clicked";
+
+	// test1
+	function handleClick(){
+		const hasClass = test1.classList.contains(CLICKED_CLASS);
+		
+		if(!hasClass){
+			test1.classList.add(CLICKED_CLASS);
+		} else {
+			test1.classList.remove(CLICKED_CLASS);
+		}
+	}
+	function init(){
+		test1.addEventListener("click", handleClick);  
+	}
+	init();
+
+	// test2
+	function handleClick2(){
+		test2.classList.toggle(CLICKED_CLASS);
+	}
+	function init2(){
+		test2.addEventListener("click", handleClick2);
+	}
+	init2();
+
+// ===================================================================================
+
+/* js-clock */
+
+
+	const clockContainer = document.querySelector(".js-clock"),
+				clockTitle = clockContainer.querySelector("h1");
+
+	function getTime(){
+		const date = new Date();  
+		const hours = date.getHours();
+		const minutes = date.getMinutes();
+		const seconds = date.getSeconds();
+		clockTitle.innerText = `${hours < 10 ? `0${hours}` : hours }:${
+			minutes < 10 ? `0${minutes}` : minutes 
+		}:${seconds < 10 ? `0${seconds}` : seconds}`;
+	}
+
+	function init3(){
+		getTime();
+		setInterval(getTime, 1000);
+	}
+
+	init3();
+
+
+	const form = document.querySelector(".js-form-greeting"),
+				input = form.querySelector("input"),
+				greeting = document.querySelector(".greetings");
+
+	const USER_LS = "currentUser",
+				SHOWING_CN = "showing";
+
+
+	function saveName(text){
+		localStorage.setItem(USER_LS, text);
+	}
+
+	function handleSubmit(evet){
+		event.preventDefault(); 
+		const currentValue = input.value;
+		paintGreeting(currentValue);
+		saveName(currentValue);
+	}
+
+	function askForName(){
+		form.classList.add(SHOWING_CN);
+		form.addEventListener("submit", handleSubmit);
+	}
+
+
+	function paintGreeting(text){
+		form.classList.remove(SHOWING_CN);
+		greeting.classList.add(SHOWING_CN);
+		greeting.innerText = `Hello!!  ${text}`
+	}
+	function loadName(){
+		const currentUser = localStorage.getItem(USER_LS);
+		if(currentUser === null){
+			// 사용자가 없는경우
+			askForName();
+		} else{
+			paintGreeting(currentUser);
+		}
+	}
+
+	function init4(){
+		loadName();
+	}
+	init4();
+
+// ===================================================================================
+
+
+/* To Do List */
+
+	const toDoForm = document.querySelector(".js-toDoForm"),
+				toDoInput = toDoForm.querySelector("input"),
+				toDoList = document.querySelector(".js-toDoList");
+
+	const TODOS_LS = 'toDos';
+
+	let toDos = [];
+
+	function deleteToDo(event){
+		const btn = event.target;
+		const li = btn.parentNode;
+		toDoList.removeChild(li);
+		// toDoList.removeChild(event.target.parentElement);
+		const cleanToDos = toDos.filter( function(toDo){
+			return toDo.id !== parseInt(li.id);
+		});
+		toDos = cleanToDos
+		saveToDos();
+		console.log(cleanToDos)
+	}
+
+	// toDos를 가져와서 로컬에 저장
+	function saveToDos(){
+		localStorage.setItem(TODOS_LS, JSON.stringify(toDos));  
+	}
+	// 자바스크립트는 string 만 저장하기때문에 JSON.stringify 사용
+	// JSON.stringify : 자바스크립트 object를 string 으로 바꿔줌
+
+
+
+	function paintToDo(text){
+		const li = document.createElement("li");
+		const delBtn = document.createElement("button");  
+		const span = document.createElement("span");
+		const newId = toDos.length + 1;
+
+		delBtn.innerHTML="❌";
+		delBtn.addEventListener("click", deleteToDo);
+		span.innerText = text;
+		li.appendChild(delBtn);
+		li.appendChild(span);  
+		li.id = newId;
+		toDoList.appendChild(li);
+		
+
+		const toDoObj = {
+			text: text,
+			id: newId
+		};
+		toDos.push(toDoObj);
+		saveToDos(); // push 다음에 호출해야함
+	}
+
+
+	function handleSubmit2(event){
+		event.preventDefault();
+		const currentValue2 = toDoInput.value;
+		paintToDo(currentValue2);
+		toDoInput.value = "";
+	}
+
+	function loadToDos(){
+		const loadedToDos = localStorage.getItem(TODOS_LS);
+		if(loadedToDos !== null){
+			const parsedToDos = JSON.parse(loadedToDos);
+			// console.log(parsedToDos);
+			parsedToDos.forEach(function(toDo){
+				paintToDo(toDo.text);
+			});
+		}
+	}
+
+	function init5(){
+		loadToDos();
+		toDoForm.addEventListener("submit", handleSubmit2 )
+	}
+	init5();
+
+
+	// local storage 에는 자바스크립트의 Data 를 저장 할 수 없음
+	// 오직 string만 저장 할 수 있음
+
+/* background */
+
+
+const body = document.querySelector("body");
+const IMG_NUMBER = 5;  // 이미지 갯수만큼 원하는대로
+
+
+function paintImg(imgNumber){
+	const image = new Image();
+	img.src = `/img/${imgNumber + 1}.jpg`
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 공통 : test1, test2 
-const test1 = document.querySelector("#test1");
-const test2 = document.querySelector("#test2");
-const CLICKED_CLASS = "clicked";
-
-// test1
-function handleClick(){
-  const hasClass = test1.classList.contains(CLICKED_CLASS);
-  
-  if(!hasClass){
-    test1.classList.add(CLICKED_CLASS);
-  } else {
-    test1.classList.remove(CLICKED_CLASS);
-  }
-}
-function init(){
-  test1.addEventListener("click", handleClick);  
-}
-init();
-
-// test2
-function handleClick2(){
-  test2.classList.toggle(CLICKED_CLASS);
-}
-function init2(){
-  test2.addEventListener("click", handleClick2);
-}
-init2();
-
-// ======================================================
-
-// js-clock
-const clockContainer = document.querySelector(".js-clock"),
-      clockTitle = clockContainer.querySelector("h1");
-
-function getTime(){
-  const date = new Date();  
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const seconds = date.getSeconds();
-  clockTitle.innerText = `현재시간 ${hours < 10 ? `0${hours}` : hours }:${
-    minutes < 10 ? `0${minutes}` : minutes 
-  }:${seconds < 10 ? `0${seconds}` : seconds}`;
+function genRandom(){
+	const number = Math.floor(Math.random() * IMG_NUMBER);
+	return number;
 }
 
-function init3(){
-  getTime();
-  setInterval(getTime, 1000);
+function init6(){
+	const randomNumber = genRandom();
+	paintImg(randomNumber);
 }
-
-init3();
-
+init6();
 
 
 
 
 </script>
-<script src="clock.js"></script>
+<!-- <script src="clock.js"></script> -->
 </body>
 </html>
